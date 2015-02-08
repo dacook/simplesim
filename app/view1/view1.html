@@ -1,4 +1,10 @@
 <div ng-controller="View1Ctrl">
+  <div class="controls">
+    <button id="play_pause" ng-click="startStop()">Play/Pause</button>
+    <input ng-model="time">
+    <span>{{status}}</span>
+  </div>
+
   <div ng-repeat="object in objects" class="object {{object.type}}">
     <h2>{{object.type}}:{{object.id}}</h2>
     <table>
