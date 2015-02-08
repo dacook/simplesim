@@ -35,7 +35,8 @@ angular.module('myApp.view1', ['ngRoute'])
       properties: {
         age: {value:18},
         health: {value:100 },
-        money: {value:100}
+        money: {value:100},
+        food: {value:0}
       }
     },
     {
@@ -52,7 +53,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
   $scope.rules = [
     {
-      id: 'food',
+      id: 'food1',
       type: 'Rule',
       inputs: {
         money: 8
@@ -91,9 +92,8 @@ angular.module('myApp.view1', ['ngRoute'])
       angular.forEach(value.adjustments, function(property_adjustment, property_name){
         var props = propertySearch($scope.objects, property_name);
         angular.forEach(props, function(property){
-          console.log(property);
           property.value += property_adjustment;
-          console.log(property);
+          // console.log(property_name, property.value);
         });
       });
     });
@@ -112,6 +112,30 @@ angular.module('myApp.view1', ['ngRoute'])
       $scope.status = 'Paused';
     }
   }
+
+  $scope.executeRule = function(rule, obj_input, obj_output){
+    angular.forEach(rule.inputs, function(property_adjustment, property_name){     
+      console.log(obj_input.id, 
+        "gives", property_adjustment, property_name, 
+        "to", obj_output.id);
+      obj_input.properties[property_name].value -= property_adjustment;
+      obj_output.properties[property_name].value += property_adjustment;
+    });
+
+    angular.forEach(rule.outputs, function(property_adjustment, property_name){
+      console.log(obj_output.id, 
+        "gives", property_adjustment, property_name, 
+        "to", obj_input.id);
+      obj_output.properties[property_name].value -= property_adjustment;
+      obj_input.properties[property_name].value += property_adjustment;
+    });
+  };
+
+  $scope.buyEat = function(){
+    $scope.executeRule($scope.rules[0], $scope.objects[0], $scope.objects[1]);
+    $scope.executeRule($scope.rules[1], $scope.objects[0], $scope.objects[0]);
+    //... and here we realise there is a difference between trade and transform
+  };
 
   //Init
   // $scope.startStop(); //for some reason this calls twicE?

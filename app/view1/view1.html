@@ -4,6 +4,9 @@
     <input ng-model="time">
     <span>{{status}}</span>
   </div>
+  <div class="actions">
+    <button ng-click="buyEat()">Buy food and eat it</button>
+  </div>
 
   <div ng-repeat="object in objects" class="object {{object.type}}">
     <h2>{{object.type}}:{{object.id}}</h2>
