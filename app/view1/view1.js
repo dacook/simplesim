@@ -54,7 +54,7 @@ angular.module('myApp.view1', ['ngRoute'])
   $scope.rules = [
     {
       id: 'food1',
-      type: 'Rule',
+      type: 'Rule_Trade',
       inputs: {
         money: 8
       },
@@ -64,7 +64,7 @@ angular.module('myApp.view1', ['ngRoute'])
     },
     {
       id: 'eat',
-      type: 'Rule',
+      type: 'Rule_Transform',
       inputs: {
         food: 1
       },
