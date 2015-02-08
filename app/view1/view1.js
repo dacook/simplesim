@@ -33,9 +33,9 @@ angular.module('myApp.view1', ['ngRoute'])
       type: 'Person',
       name: "Smith",
       properties: {
-        age: 18,
-        health: 100,
-        money: 100
+        age: {value:18},
+        health: {value:100 },
+        money: {value:100}
       }
     },
     {
@@ -43,8 +43,8 @@ angular.module('myApp.view1', ['ngRoute'])
       type: 'Shop',
       name: "Restaurant",
       properties: {
-        money: Infinity,
-        food: Infinity
+        money: {value:Infinity},
+        food: {value:Infinity}
       }
     }
 
@@ -82,14 +82,19 @@ angular.module('myApp.view1', ['ngRoute'])
         health: -0.1 /*person.health*/
       }
     }
-
   ];
+
 
   $scope.incrementTime = function(){
     $scope.time++;
     angular.forEach($scope.time_rules, function(value, key){
-      angular.forEach(value.adjustments, function(value, key){
-        console.log(key, value, propertySearch($scope.objects, key));
+      angular.forEach(value.adjustments, function(property_adjustment, property_name){
+        var props = propertySearch($scope.objects, property_name);
+        angular.forEach(props, function(property){
+          console.log(property);
+          property.value += property_adjustment;
+          console.log(property);
+        });
       });
     });
   };

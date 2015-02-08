@@ -8,9 +8,9 @@
   <div ng-repeat="object in objects" class="object {{object.type}}">
     <h2>{{object.type}}:{{object.id}}</h2>
     <table>
-      <tr ng-repeat="(property_name, property_value) in object.properties" class="properties">
+      <tr ng-repeat="(property_name, property) in object.properties" class="properties">
         <td>{{property_name}}</td>
-        <td>{{property_value}}</td>
+        <td>{{property.value | number : 2}}</td>
       </tr>
     </table>
   </div>
